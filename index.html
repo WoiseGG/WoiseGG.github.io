@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="keywords" content="standoff 2 читы, standoff 2 моды, взлом standoff 2, читы на standoff 2, скачать моды, WoiseGG">
+  <title>Woise GG — Standoff 2 Software</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* === Ключевое исправление: гарантируем 100% высоты === */
+    html, body {
+      height: 100%;
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+      background: #000;
+    }
+
+    #page-main {
+      background: linear-gradient(-45deg, #1a1a2e, #16213e, #0f0c29, #1a1a2e);
+      background-size: 400% 400%;
+      animation: gradientWave 10s ease infinite;
+      position: relative;
+    }
+
+    @keyframes gradientWave {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .page {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      /* === Исправление: min-height 100vh === */
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      z-index: 10;
+    }
+
+    .page.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .cyber-corner {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      z-index: 5;
+      opacity: 0.6;
+      animation: cornerPulse 3s infinite alternate;
+      pointer-events: none;
+    }
+
+    .corner-tl { top: -10px; left: -10px; border-top: 2px solid #ff00cc; border-left: 2px solid #ff00cc; }
+    .corner-tr { top: -10px; right: -10px; border-top: 2px solid #00e6ff; border-right: 2px solid #00e6ff; }
+    .corner-bl { bottom: -10px; left: -10px; border-bottom: 2px solid #ff00cc; border-left: 2px solid #ff00cc; }
+    .corner-br { bottom: -10px; right: -10px; border-bottom: 2px solid #00e6ff; border-right: 2px solid #00e6ff; }
+
+    @keyframes cornerPulse {
+      0% { opacity: 0.4; }
+      100% { opacity: 0.8; box-shadow: 0 0 10px currentColor; }
+    }
+
+    .main-content {
+      position: relative;
+      z-index: 20;
+      text-align: center;
+      max-width: 800px;
+      padding: 0 1.5rem;
+    }
+
+    h1 {
+      font-size: 2.9rem;
+      margin-bottom: 0.9rem;
+      background: linear-gradient(90deg, #ff00cc, #3333ff, #00e6ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 20px rgba(255, 0, 204, 0.4);
+      cursor: pointer;
+      letter-spacing: 1px;
+      animation: glowText 2s infinite alternate;
+    }
+
+    @keyframes glowText {
+      from { text-shadow: 0 0 15px rgba(255, 0, 204, 0.5); }
+      to { text-shadow: 0 0 25px rgba(0, 230, 255, 0.7), 0 0 35px rgba(255, 0, 204, 0.6); }
+    }
+
+    /* === Исправление цвета текста на главной === */
+    p.hero {
+      font-size: 1.18rem;
+      margin-bottom: 1.9rem;
+      max-width: 630px;
+      /* Было: opacity: 0.95; */
+      color: #ffffff;
+      text-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
+      line-height: 1.55;
+    }
+
+    .main-buttons {
+      display: flex;
+      gap: 1.7rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 1.5rem 0;
+    }
+
+    .btn {
+      background: rgba(255, 255, 255, 0.13);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      color: white;
+      padding: 1rem 2.1rem;
+      font-size: 1.22rem;
+      border-radius: 18px;
+      cursor: pointer;
+      transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      font-weight: 600;
+      min-width: 155px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: 0.6s;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn:hover {
+      transform: translateY(-5px) scale(1.04);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    }
+
+    .btn-back {
+      position: absolute;
+      top: 22px;
+      left: 22px;
+      padding: 0.6rem 1.3rem;
+      font-size: 0.98rem;
+      z-index: 30;
+      border-radius: 14px;
+    }
+
+    .btn-download {
+      padding: 1.2rem 2.8rem;
+      font-size: 1.4rem;
+      background: linear-gradient(90deg, #ff00cc, #3333ff);
+      border: none;
+      margin-top: 2rem;
+      position: relative;
+      box-shadow: 0 0 25px rgba(255, 0, 204, 0.4);
+      animation: pulseBtn 2s infinite;
+    }
+
+    @keyframes pulseBtn {
+      0% { box-shadow: 0 0 0 0 rgba(255, 0, 204, 0.6); }
+      70% { box-shadow: 0 0 0 16px rgba(255, 0, 204, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 0, 204, 0); }
+    }
+
+    /* === Исправление цвета Telegram-ссылок === */
+    .tg-link {
+      display: inline-block;
+      margin: 0.55rem 0.75rem;
+      color: #ffffff; /* Было: #00e6ff; */
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.08rem;
+      transition: all 0.3s;
+      position: relative;
+      text-shadow: 0 0 6px rgba(0, 0, 0, 0.6); /* Добавлена тень */
+    }
+
+    .tg-link::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #00e6ff;
+      transition: width 0.3s;
+    }
+
+    .tg-link:hover::after {
+      width: 100%;
+    }
+
+    .tg-link:hover {
+      color: #00e6ff; /* Цвет при наведении */
+    }
+
+    /* === Исправление цвета подвала === */
+    footer {
+      margin-top: 1.7rem;
+      font-size: 0.9rem;
+      color: #ffffff; /* Было: opacity: 0.82; */
+      text-shadow: 0 0 6px rgba(0, 0, 0, 0.6); /* Добавлена тень */
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    #page-impulse {
+      background: #0a0018;
+      color: white;
+    }
+
+    #page-impulse h1 {
+      color: #d400ff !important;
+      background: none !important;
+      text-shadow: 0 0 22px rgba(212, 0, 255, 0.75);
+      animation: glowPurpleText 2.2s infinite alternate;
+    }
+
+    @keyframes glowPurpleText {
+      from { text-shadow: 0 0 18px rgba(212, 0, 255, 0.65); }
+      to { text-shadow: 0 0 32px rgba(180, 0, 255, 0.85), 0 0 42px rgba(100, 0, 200, 0.6); }
+    }
+
+    #page-nerest {
+      background: linear-gradient(to bottom, #9fd6f2, #d8f3fc);
+      color: #1a1a1a;
+    }
+
+    #page-nerest h1 {
+      color: #FFD700 !important;
+      background: none !important;
+      text-shadow: 0 0 18px rgba(255, 215, 0, 0.75);
+      animation: glowGoldText 1.8s infinite alternate;
+    }
+
+    @keyframes glowGoldText {
+      from { text-shadow: 0 0 16px rgba(255, 215, 0, 0.65); }
+      to { text-shadow: 0 0 26px rgba(255, 165, 0, 0.85); }
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.4rem;
+      margin: 2rem 0;
+      max-width: 880px;
+      padding: 0 1rem;
+    }
+
+    .feature-card {
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 20px;
+      padding: 1.4rem;
+      width: 230px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(30px) rotateX(10deg);
+      animation: cardEnter 0.7s forwards;
+    }
+
+    .page.active .feature-card {
+      animation: cardEnter 0.7s forwards;
+    }
+
+    .feature-card:nth-child(1) { animation-delay: 0.1s; }
+    .feature-card:nth-child(2) { animation-delay: 0.25s; }
+    .feature-card:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes cardEnter {
+      to {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+      }
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px) scale(1.04) rotateX(5deg);
+      background: rgba(0, 0, 0, 0.28);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+      z-index: 3;
+      border-color: rgba(255, 0, 204, 0.4);
+    }
+
+    #page-nerest .feature-card i {
+      display: none;
+    }
+
+    #page-nerest .feature-card h3 {
+      margin-top: 0;
+      margin-bottom: 0.9rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .feature-card p {
+      font-size: 0.94rem;
+      line-height: 1.55;
+    }
+
+    #easter-egg {
+      position: fixed;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.8);
+      color: gold;
+      padding: 10px 22px;
+      border-radius: 12px;
+      opacity: 0;
+      transition: opacity 0.45s;
+      pointer-events: none;
+      font-size: 1rem;
+      z-index: 1000;
+      font-weight: 600;
+    }
+
+    #easter-egg.show {
+      opacity: 1;
+    }
+
+    .explosion-particle {
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cyber Corners -->
+  <div class="cyber-corner corner-tl"></div>
+  <div class="cyber-corner corner-tr"></div>
+  <div class="cyber-corner corner-bl"></div>
+  <div class="cyber-corner corner-br"></div>
+
+  <div id="page-main" class="page active">
+    <canvas id="particles-main"></canvas>
+    <div class="main-content">
+      <h1 id="logo">Woise GG</h1>
+      <p class="hero">Лучший софт для Standoff 2 от команды профессионалов</p>
+
+      <div class="main-buttons">
+        <button class="btn" onclick="showPage('impulse')">Impulse</button>
+        <button class="btn" onclick="showPage('nerest')">Nerest</button>
+      </div>
+
+      <div>
+        <a href="https://t.me/WoiseGG" target="_blank" class="tg-link">Канал Woise GG</a>
+        <a href="https://t.me/softcupGG" target="_blank" class="tg-link">Softcup GG</a>
+      </div>
+
+      <footer>© 2025 Woise GG | Создатель: @lidsoy1 | Менеджер по постам: @Lite_Name</footer>
+    </div>
+  </div>
+
+  <div id="page-impulse" class="page">
+    <button class="btn btn-back" onclick="showPage('main')">← Назад</button>
+    <h1>Impulse</h1>
+    <p class="hero">Мощный и стабильный софт для элитных игроков</p>
+
+    <div class="features">
+      <div class="feature-card">
+        <i class="fas fa-bolt"></i>
+        <h3>⚡ Реакция</h3>
+        <p>Мгновенный отклик без лагов</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-shield-alt"></i>
+        <h3>🛡️ Анонимность</h3>
+        <p>Полное скрытие от античита</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-sync"></i>
+        <h3>🔄 Обновления</h3>
+        <p>Автоапдейт после каждого патча</p>
+      </div>
+    </div>
+
+    <!-- Ссылка на Impulse -->
+    <a href="https://github.com/lokio-dotcom/woisegg/raw/refs/heads/main/impulse.zip" 
+       id="download-impulse" 
+       class="btn btn-download" 
+       download="impulse.zip">Скачать Impulse</a>
+    <canvas id="canvas-impulse"></canvas>
+  </div>
+
+  <div id="page-nerest" class="page">
+    <button class="btn btn-back" onclick="showPage('main')">← Назад</button>
+    <h1>Nerest</h1>
+    <p class="hero">Лёгкий и быстрый софт для всех</p>
+
+    <div class="features">
+      <div class="feature-card">
+        <h3>☀️ Стабильность</h3>
+        <p>Работает даже на слабых ПК</p>
+      </div>
+      <div class="feature-card">
+        <h3>❄️ Фичи</h3>
+        <p>ESP, Aim, Radar — всё в одном</p>
+      </div>
+      <div class="feature-card">
+        <h3>🎧 Поддержка</h3>
+        <p>24/7 в Telegram</p>
+      </div>
+    </div>
+
+    <!-- Ссылка на Nerest -->
+    <a href="https://github.com/lokio-dotcom/woisegg/raw/refs/heads/main/nerest.zip" 
+       id="download-nerest" 
+       class="btn btn-download" 
+       download="nerest.zip">Скачать Nerest</a>
+    <canvas id="canvas-nerest"></canvas>
+  </div>
+
+  <div id="easter-egg">Создатель: @lidsoy1 | Менеджер по постам: @Lite_Name</div>
+
+  <script>
+    // === Скачивание с анимацией ===
+    function triggerDownloadWithEffect(link, e) {
+      e.preventDefault();
+      const rect = link.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+
+      const steps = [2, -2, 2, -2, 0];
+      steps.forEach((v, i) => setTimeout(() => document.body.style.transform = `translate(${v}px, ${v}px)`, i * 20));
+
+      const flash = document.createElement('div');
+      flash.style.cssText = `position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(180,100,255,0.5);z-index:9998;pointer-events:none`;
+      document.body.appendChild(flash);
+      setTimeout(() => document.body.removeChild(flash), 150);
+
+      for (let i = 0; i < 40; i++) {
+        const p = document.createElement('div');
+        p.className = 'explosion-particle';
+        p.style.left = x + 'px';
+        p.style.top = y + 'px';
+        p.style.backgroundColor = `hsl(${270 + Math.random() * 50}, 95%, 75%)`;
+        document.body.appendChild(p);
+
+        const a = Math.random() * Math.PI * 2;
+        const s = 4 + Math.random() * 6;
+        let ox = parseFloat(p.style.left), oy = parseFloat(p.style.top), op = 1;
+        const anim = () => {
+          ox += Math.cos(a) * s;
+          oy += Math.sin(a) * s;
+          op -= 0.04;
+          p.style.left = ox + 'px';
+          p.style.top = oy + 'px';
+          p.style.opacity = op;
+          if (op > 0) requestAnimationFrame(anim);
+          else p.remove();
+        };
+        anim();
+      }
+
+      // Запуск реальной загрузки
+      const tmp = document.createElement('a');
+      tmp.href = link.href;
+      tmp.download = link.download || 'woise.zip';
+      document.body.appendChild(tmp);
+      tmp.click();
+      document.body.removeChild(tmp);
+    }
+
+    document.getElementById('download-impulse').addEventListener('click', e => triggerDownloadWithEffect(e.target, e));
+    document.getElementById('download-nerest').addEventListener('click', e => triggerDownloadWithEffect(e.target, e));
+
+    // === Остальной JS ===
+    let parallaxX = 0, parallaxY = 0;
+    document.addEventListener('mousemove', (e) => {
+      parallaxX = (e.clientX - window.innerWidth / 2) / 20;
+      parallaxY = (e.clientY - window.innerHeight / 2) / 20;
+    });
+
+    function initMainParticles() {
+      const canvas = document.getElementById('particles-main');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const particles = [];
+      const count = Math.min(90, Math.floor(window.innerWidth / 9));
+
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 4 + 1,
+          speedX: (Math.random() - 0.5) * 0.7,
+          speedY: (Math.random() - 0.5) * 0.7,
+          baseColor: 270 + Math.random() * 60,
+          opacity: Math.random() * 0.7 + 0.2
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = 'rgba(10, 0, 24, 0.06)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        particles.forEach(p => {
+          const dx = p.x - (window.innerWidth / 2 + parallaxX * 10);
+          const dy = p.y - (window.innerHeight / 2 + parallaxY * 10);
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          let opacity = p.opacity;
+          if (dist < 150) {
+            opacity = Math.max(0.3, p.opacity + (150 - dist) / 300);
+            ctx.beginPath();
+            ctx.arc(p.x + parallaxX, p.y + parallaxY, p.size * 1.5, 0, Math.PI * 2);
+            ctx.fillStyle = `hsla(${p.baseColor}, 90%, 75%, ${opacity * 0.6})`;
+            ctx.fill();
+          }
+
+          ctx.beginPath();
+          ctx.arc(p.x + parallaxX, p.y + parallaxY, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = `hsla(${p.baseColor}, 90%, 75%, ${opacity})`;
+          ctx.fill();
+
+          p.x += p.speedX;
+          p.y += p.speedY;
+          if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+          if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+        });
+
+        requestAnimationFrame(draw);
+      }
+
+      draw();
+      window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+    }
+
+    let impulseActive = false, lightningTimeouts = [];
+    function initImpulseLightning() {
+      if (impulseActive) return;
+      impulseActive = true;
+
+      const canvas = document.getElementById('canvas-impulse');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const bg = ctx.createLinearGradient(0, 0, 0, canvas.height);
+      bg.addColorStop(0, '#120022');
+      bg.addColorStop(1, '#0a0018');
+
+      let phase = 0;
+      function drawExplosion() {
+        if (!document.getElementById('page-impulse').classList.contains('active')) return;
+        const cx = canvas.width / 2, cy = canvas.height / 2;
+        const r = 38 + Math.sin(phase) * 12;
+        const a = 0.5 + Math.sin(phase * 2) * 0.3;
+        const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+        g.addColorStop(0, `rgba(180, 0, 255, ${a})`);
+        g.addColorStop(1, `rgba(80, 0, 160, 0)`);
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.fillStyle = g;
+        ctx.fill();
+        phase += 0.05;
+        requestAnimationFrame(drawExplosion);
+      }
+
+      function drawBolt(x1, y1, x2, y2, depth = 0) {
+        if (depth > 2) return;
+        const mx = (x1 + x2) / 2 + (Math.random() - 0.5) * 130;
+        const my = (y1 + y2) / 2 + (Math.random() - 0.5) * 65;
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(mx, my);
+        ctx.lineTo(x2, y2);
+        ctx.strokeStyle = `hsla(${270 + Math.random() * 30}, 100%, 85%, 1)`;
+        ctx.lineWidth = 2.8 + Math.random() * 2.8;
+        ctx.stroke();
+
+        if (Math.random() > 0.6 && depth < 1) {
+          drawBolt(mx, my, mx + (Math.random() - 0.5) * 150, my + Math.random() * 100, depth + 1);
+        }
+      }
+
+      function animateBg() {
+        if (!document.getElementById('page-impulse').classList.contains('active')) {
+          impulseActive = false;
+          return;
+        }
+        ctx.fillStyle = bg;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        requestAnimationFrame(animateBg);
+      }
+
+      animateBg();
+      drawExplosion();
+
+      lightningTimeouts.forEach(clearTimeout);
+      lightningTimeouts = [];
+
+      function schedule() {
+        if (!document.getElementById('page-impulse').classList.contains('active')) return;
+
+        drawBolt(
+          Math.random() * canvas.width,
+          0,
+          Math.random() * canvas.width,
+          canvas.height
+        );
+
+        setTimeout(() => {
+          ctx.fillStyle = 'rgba(10, 0, 24, 0.12)';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }, 120);
+
+        const next = 2000 + Math.random() * 1000;
+        const id = setTimeout(schedule, next);
+        lightningTimeouts.push(id);
+      }
+
+      schedule();
+    }
+
+    let nerestActive = false;
+    function initNerestWeather() {
+      if (nerestActive) return;
+      nerestActive = true;
+
+      const canvas = document.getElementById('canvas-nerest');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      let sunX = canvas.width * 0.86;
+      let c1 = 75, c2 = 350, c3 = 630;
+      const flakes = [];
+      for (let i = 0; i < 100; i++) {
+        flakes.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 2.2 + 0.7,
+          speed: Math.random() * 1.6 + 0.5,
+          drift: Math.random() * 0.42 - 0.21
+        });
+      }
+
+      function cloud(x, y, s) {
+        ctx.fillStyle = 'rgba(255,255,255,0.94)';
+        ctx.beginPath();
+        ctx.arc(x, y, s, 0, Math.PI * 2);
+        ctx.arc(x + s * 0.92, y - s * 0.26, s * 0.87, 0, Math.PI * 2);
+        ctx.arc(x + s * 1.84, y, s, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      function sun(x) {
+        const y = canvas.height * 0.16;
+        const r = 60;
+        const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+        g.addColorStop(0, '#FFD700');
+        g.addColorStop(1, '#FF8C00');
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fillStyle = g;
+        ctx.fill();
+      }
+
+      function animate() {
+        if (!document.getElementById('page-nerest').classList.contains('active')) {
+          nerestActive = false;
+          return;
+        }
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        c1 = (c1 + 0.065) % (canvas.width + 220);
+        c2 = (c2 + 0.052) % (canvas.width + 220);
+        c3 = (c3 + 0.058) % (canvas.width + 220);
+        cloud(c1, 84, 30);
+        cloud(c2, 120, 40);
+        cloud(c3, 94, 34);
+
+        sunX = (sunX + 0.055) % (canvas.width + 220);
+        sun(sunX);
+
+        flakes.forEach(f => {
+          ctx.beginPath();
+          ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(255,255,255,0.89)';
+          ctx.fill();
+          f.y += f.speed;
+          f.x += f.drift;
+          if (f.y > canvas.height) f.y = -14;
+          if (f.x > canvas.width) f.x = 0;
+          if (f.x < 0) f.x = canvas.width;
+        });
+
+        requestAnimationFrame(animate);
+      }
+      animate();
+    }
+
+    function showPage(id) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(`page-${id}`).classList.add('active');
+
+      if (id === 'main') {
+        initMainParticles();
+      } else if (id === 'impulse') {
+        setTimeout(initImpulseLightning, 100);
+      } else if (id === 'nerest') {
+        setTimeout(initNerestWeather, 100);
+      }
+    }
+
+    // === Исправление: принудительный запуск анимаций при загрузке ===
+    window.addEventListener('DOMContentLoaded', () => {
+      initMainParticles();
+      // Принудительно активируем главную страницу
+      document.getElementById('page-main').classList.add('active');
+    });
+
+    let clicks = 0;
+    document.getElementById('logo')?.addEventListener('click', () => {
+      clicks++;
+      if (clicks >= 5) {
+        document.getElementById('easter-egg').classList.add('show');
+        setTimeout(() => document.getElementById('easter-egg').classList.remove('show'), 3200);
+        clicks = 0;
+      }
+    });
+  </script>
+</body>
+</html>
